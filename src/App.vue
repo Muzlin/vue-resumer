@@ -1,28 +1,49 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+    <Topbar class="tobar"/>
+    <main>
+      <Editor class="editor"/>
+      <Preview class="preview"/>
+    </main>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+  import Topbar from './components/Topbar'
+  import Editor from './components/Editor'
+  import Preview from './components/Preview'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  export default {
+    name: 'App',
+    components: {
+      Topbar,
+      Editor,
+      Preview
+    }
   }
-}
+
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+html,body,#app{height: 100%;overflow: hidden;}
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* height: 100vh; */
+    display: flex;
+    flex-direction: column;
+  }
+  .topbar{
+  }
+  main {
+    display: flex;
+    flex: 1;
+    >.editor {
+      width: 20%;
+    }
+    >.preview {
+      flex: 1;
+    }
+  }
 </style>
