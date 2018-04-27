@@ -70,7 +70,7 @@
       flex: 1;
       margin: 16px 8px 16px 16px;
       background: #fff;
-      overflow: hidden;
+      overflow: auto;
     }
   }
 

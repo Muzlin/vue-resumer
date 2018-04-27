@@ -3,7 +3,7 @@
     <nav>
       <ol>
         <li v-for="i in [0,1,2,3,4,5]" v-bind:class="{active : currentTab === i}" v-on:click="currentTab = i">
-           <svg class="icon">
+          <svg class="icon">
             <use v-bind:xlink:href="`#icon-${icons[i]}`"></use>
           </svg>
         </li>
@@ -11,31 +11,57 @@
     </nav>
     <main>
       <ol>
-        <li v-bind:class="{active:currentTab === 0}">tab 1</li>
-        <li v-bind:class="{active:currentTab === 1}">tab 2</li>
-        <li v-bind:class="{active:currentTab === 2}">tab 3</li>
-        <li v-bind:class="{active:currentTab === 3}">tab 4</li>
-        <li v-bind:class="{active:currentTab === 4}">tab 5</li>
-        <li v-bind:class="{active:currentTab === 5}">tab 6</li>
+        <li v-bind:class="{active:currentTab === 0}">
+          <ProfileEditor v-bind:profile="profile" />
+        </li>
+        <li v-bind:class="{active:currentTab === 1}">
+          <WorksEditor v-bind:workHistory="workHistory" />
+        </li>
+        <li v-bind:class="{active:currentTab === 2}">
+          <h2>学习经历</h2>
+        </li>
+        <li v-bind:class="{active:currentTab === 3}">
+          <h2>项目情况</h2>
+        </li>
+        <li v-bind:class="{active:currentTab === 4}">
+          <h2>获奖情况</h2>
+        </li>
+        <li v-bind:class="{active:currentTab === 5}">
+          <h2>联系方式</h2>
+        </li>
       </ol>
     </main>
   </div>
 </template>
 
 <script>
+  import ProfileEditor from './ProfileEditor.vue'
+  import WorksEditor from './WorksEditor.vue'
   export default {
+    components: {
+      ProfileEditor,
+      WorksEditor
+    },
     data() {
       return {
         currentTab: 0,
-        icons: ['cardid','work','book','zan1','icon--','dianhua1']
+        icons: ['cardid', 'work', 'book', 'zan1', 'icon--', 'dianhua1'],
+        profile: {
+          name: '',
+          city: '',
+          birth: ''
+        },
+        workHistory: [{
+          company: '',
+          content: ''
+        }]
       }
     }
   }
-
 </script>
 
 
-<style lang="scss" scoped>
+<style lang="scss">
   #editor {
     display: flex;
     >nav {
@@ -50,7 +76,6 @@
           fill: #fff;
         }
         &.active {
-          /*当前元素*/
           background: #fff;
           >.icon {
             fill: #000;
@@ -59,10 +84,25 @@
       }
     }
     >main {
-      >ol>li {
-        display: none;
-        &.active {
-          display: inline-block;
+      background: #fff;
+      >ol {
+        flex: 1;
+        >li {
+          display: none;
+          padding: 32px;
+          overflow: auto;
+          height: 88%;
+          &.active {
+            display: block;
+          }
+          .container {
+            position: relative;
+            .el-icon-delete {
+              position: absolute;
+              top: 12px;
+              right: 0;
+            }
+          }
         }
       }
     }
