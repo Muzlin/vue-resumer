@@ -2,8 +2,8 @@
   <div id="app">
     <Topbar class="topbar" />
     <main>
-      <Editor class="editor" />
-      <Preview class="preview" />
+      <Editor v-bind:resume="resume" class="editor" />
+      <Preview v-bind:resume="resume" class="preview" />
     </main>
   </div>
 </template>
@@ -19,6 +19,66 @@
       Topbar,
       Editor,
       Preview
+    },
+    data: function () {
+      return {
+        resume: {          
+          profile: {
+            name: '',
+            city: '',
+            birth: ''
+          },
+          profileLabels: {
+            name: '姓名',
+            city: '城市',
+            birth: '出生年月'
+          },
+          workHistory: [{
+            company: '',
+            content: ''
+          }],
+          workLabels: {
+            company: '公司',
+            content: '工作内容'
+          },
+          studyHistory: [{
+            school: '',
+            duration: '',
+            degree: ''
+          }],
+          studyLabels: {
+            school: '就读学校',
+            duration: '时间',
+            degree: '学位'
+          },
+          projectHistory: [{
+            name: '',
+            content: ''
+          }],
+          projectLabels: {
+            name: '项目',
+            content: '内容'
+          },
+          awardsHistory: [{
+            name: '',
+            descr: ''
+          }],
+          awardsLabels: {
+            name: '获得奖项',
+            descr: '描述'
+          },
+          contact: {
+            phone: '',
+            email: '',
+            address: ''
+          },
+          contactLabels: {
+            phone: '手机',
+            email: '邮箱',
+            address: '地址'
+          }
+        }
+      }
     }
   }
 

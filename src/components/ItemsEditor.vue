@@ -1,41 +1,56 @@
-
 <template>
   <div>
-    <h2>学习经历</h2>
-    <el-form>
-      <div class="container" v-for="(item,index) in items">
-        <el-form-item label="学校">
-          <el-input v-model="item.school"></el-input>
+    <h2>{{title}}</h2>
+    <el-form v-if="IsList">
+      <div class="container" v-for="(item,index) in items" v-bind:key="index">
+        <el-form-item v-for="key in Keys" v-bind:key="key" v-bind:label="labels[key]">
+          <el-input v-model="items[key]"></el-input>
         </el-form-item>
-        <el-form-item label="时间">
-          <el-input v-model="item.duration"></el-input>
-        </el-form-item>
-        <el-form-item label="学位">
-          <el-input v-model="item.degree"></el-input>
-        </el-form-item>
-        <i v-on:click="removeItem(index)" class="el-icon-delete"></i>
+        <i v-if="Action" v-on:click="removeItem(index)" class="el-icon-delete"></i>
         <hr>
       </div>
-      <el-button v-on:click="addItem()" type="primary">添加</el-button>
+      <el-button v-if="Action" v-on:click="addItem()" type="primary">添加</el-button>
+    </el-form>
+    <el-form v-else>
+      <div class="container">
+        <el-form-item v-for="(v,k) in items" :key="k" v-bind:label="labels[k]">
+          <el-input v-model="items[k]"></el-input>
+        </el-form-item>
+      </div>
     </el-form>
   </div>
 </template>
 
 <script>
   export default {
-    props: ['title','items'],
+    props: ['title', 'items', 'labels','action'],
+    computed: {
+      Keys: function () {
+        if (this.items instanceof Array) {
+          return Object.keys(this.items[0])
+        }else{
+          return this.items
+        }
+      },
+      Action:function() {
+        return !(this.action === 'false')
+      },
+      IsList:function(){
+        return this.items instanceof Array
+      }
+    },
     methods: {
       addItem() {
-        this.items.push({
-          school: '',
-          duration: '',
-          degree: ''
+        const empty = {}
+        this.Keys.map((key)=>{
+          empty[key] = ''
         })
+        this.items.push(empty)
       },
       removeItem(index) {
+        if(index === 0) return
         this.items.splice(index, 1)
       }
     }
   }
-
 </script>

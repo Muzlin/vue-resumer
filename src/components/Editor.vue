@@ -2,7 +2,7 @@
   <div id="editor">
     <nav>
       <ol>
-        <li v-for="i in [0,1,2,3,4,5]" v-bind:class="{active : currentTab === i}" v-on:click="currentTab = i">
+        <li v-for="i in [0,1,2,3,4,5]" v-bind:key="i" v-bind:class="{active : currentTab === i}" v-on:click="currentTab = i">
           <svg class="icon">
             <use v-bind:xlink:href="`#icon-${icons[i]}`"></use>
           </svg>
@@ -12,22 +12,22 @@
     <main>
       <ol>
         <li v-bind:class="{active:currentTab === 0}">
-          <ProfileEditor v-bind:profile="profile" />
+          <ItemsEditor v-bind:items="resume['profile']" v-bind:title="'个人信息'" v-bind:labels="resume['profileLabels']" v-bind:action="'false'" />
         </li>
         <li v-bind:class="{active:currentTab === 1}">
-          <WorksEditor v-bind:items="workHistory" />
+          <ItemsEditor v-bind:items="resume['workHistory']" v-bind:title="'工作经历'" v-bind:labels="resume['workLabels']" />
         </li>
         <li v-bind:class="{active:currentTab === 2}">
-          <StudysEditor v-bind:items="studyHistory" />
+          <ItemsEditor v-bind:items="resume['studyHistory']" v-bind:title="'学习经历'" v-bind:labels="resume['studyLabels']" />
         </li>
-        <li v-bind:class=" {active:currentTab===3 } ">
-          <ProjectsEditor v-bind:items="projectHistory"/>
+        <li v-bind:class="{active:currentTab ===3 }">
+          <ItemsEditor v-bind:items="resume['projectHistory']" v-bind:title="'项目经历'" v-bind:labels="resume['projectLabels']" />
         </li>
-        <li v-bind:class="{active:currentTab===4 } ">
-          <h2>获奖情况</h2>
+        <li v-bind:class="{active:currentTab ===4 }">
+          <ItemsEditor v-bind:items="resume['awardsHistory']" v-bind:title="'获奖情况'" v-bind:labels="resume['awardsLabels']" />
         </li>
-        <li v-bind:class="{active:currentTab===5 } ">
-          <h2>联系方式</h2>
+        <li v-bind:class="{active:currentTab ===5 }">
+          <ItemsEditor v-bind:items="resume['contact']" v-bind:title="'联系方式'" v-bind:labels="resume['contactLabels']" v-bind:action="'false'" />
         </li>
       </ol>
     </main>
@@ -35,40 +35,16 @@
 </template>
 
 <script>
-  import ProfileEditor from './ProfileEditor.vue'
-  import WorksEditor from './WorksEditor.vue'
-  import StudysEditor from './StudysEditor.vue'
-  import ProjectsEditor from './ProjectsEditor.vue'
+  import ItemsEditor from './ItemsEditor.vue'
   export default {
     components: {
-      ProfileEditor,
-      WorksEditor,
-      StudysEditor,
-      ProjectsEditor
+      ItemsEditor
     },
+    props:['resume'],
     data() {
       return {
         currentTab: 0,
         icons: ['cardid', 'work', 'book', 'zan1', 'icon--', 'dianhua1'],
-        profile: {
-          name: '',
-          city: '',
-          birth: ''
-        },
-        workHistory: [{
-          company: '',
-          content: ''
-        }],
-        studyHistory: [{
-          school: '',
-          duration: '',
-          degree: ''
-        }],
-        projectHistory: [{
-          name: '',
-          post: '',
-          content: ''
-        }]
       }
     }
   }
