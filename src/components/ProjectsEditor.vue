@@ -1,10 +1,13 @@
 <template>
   <div>
-    <h2>工作经历</h2>
+    <h2>项目经历</h2>
     <el-form>
       <div class="container" v-for="(item,index) in items">
-        <el-form-item label="公司">
-          <el-input v-model="item.company"></el-input>
+        <el-form-item label="项目名称">
+          <el-input v-model="item.name"></el-input>
+        </el-form-item>
+        <el-form-item label="岗位职责">
+          <el-input v-model="item.post"></el-input>
         </el-form-item>
         <el-form-item label="工作内容">
           <el-input v-model="item.content"></el-input>
@@ -23,7 +26,8 @@
     methods: {
       addItem() {
         this.items.push({
-          company: '',
+          name: '',
+          post: '',
           content: ''
         })
       },

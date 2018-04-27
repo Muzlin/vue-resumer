@@ -1,13 +1,16 @@
 <template>
   <div>
-    <h2>工作经历</h2>
+    <h2>学习经历</h2>
     <el-form>
       <div class="container" v-for="(item,index) in items">
-        <el-form-item label="公司">
-          <el-input v-model="item.company"></el-input>
+        <el-form-item label="学校">
+          <el-input v-model="item.school"></el-input>
         </el-form-item>
-        <el-form-item label="工作内容">
-          <el-input v-model="item.content"></el-input>
+        <el-form-item label="时间">
+          <el-input v-model="item.duration"></el-input>
+        </el-form-item>
+        <el-form-item label="学位">
+          <el-input v-model="item.degree"></el-input>
         </el-form-item>
         <i v-on:click="removeItem(index)" class="el-icon-delete"></i>
         <hr>
@@ -23,8 +26,9 @@
     methods: {
       addItem() {
         this.items.push({
-          company: '',
-          content: ''
+          school: '',
+          duration: '',
+          degree: ''
         })
       },
       removeItem(index) {

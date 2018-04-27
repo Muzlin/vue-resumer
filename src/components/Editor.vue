@@ -15,18 +15,18 @@
           <ProfileEditor v-bind:profile="profile" />
         </li>
         <li v-bind:class="{active:currentTab === 1}">
-          <WorksEditor v-bind:workHistory="workHistory" />
+          <WorksEditor v-bind:items="workHistory" />
         </li>
         <li v-bind:class="{active:currentTab === 2}">
-          <h2>学习经历</h2>
+          <StudysEditor v-bind:items="studyHistory" />
         </li>
-        <li v-bind:class="{active:currentTab === 3}">
-          <h2>项目情况</h2>
+        <li v-bind:class=" {active:currentTab===3 } ">
+          <ProjectsEditor v-bind:items="projectHistory"/>
         </li>
-        <li v-bind:class="{active:currentTab === 4}">
+        <li v-bind:class="{active:currentTab===4 } ">
           <h2>获奖情况</h2>
         </li>
-        <li v-bind:class="{active:currentTab === 5}">
+        <li v-bind:class="{active:currentTab===5 } ">
           <h2>联系方式</h2>
         </li>
       </ol>
@@ -37,10 +37,14 @@
 <script>
   import ProfileEditor from './ProfileEditor.vue'
   import WorksEditor from './WorksEditor.vue'
+  import StudysEditor from './StudysEditor.vue'
+  import ProjectsEditor from './ProjectsEditor.vue'
   export default {
     components: {
       ProfileEditor,
-      WorksEditor
+      WorksEditor,
+      StudysEditor,
+      ProjectsEditor
     },
     data() {
       return {
@@ -54,10 +58,21 @@
         workHistory: [{
           company: '',
           content: ''
+        }],
+        studyHistory: [{
+          school: '',
+          duration: '',
+          degree: ''
+        }],
+        projectHistory: [{
+          name: '',
+          post: '',
+          content: ''
         }]
       }
     }
   }
+
 </script>
 
 
